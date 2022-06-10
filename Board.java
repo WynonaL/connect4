@@ -1,13 +1,7 @@
-//Wynona Lam 1/19/22 Class that mimics a game of connect4
-//https://gist.github.com/jonathan-irvin/97537512eb65a8bbcb9a
-package hw3;
+//Wynona Lam 1/19/22 Class that mimics a game of connect4 with ASCII art
 
-import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdOut;
-
+import java.util.Scanner;
 public class Board {
-	// Add your own PRIVATE fields here.
-	// They must have type char, int, boolean, String, or they can be 1D or 2D arrays of these types.
 	
 	private char[][] theBoard = new char[6][7];
 	private int turnCount = 0; 
@@ -53,9 +47,6 @@ public class Board {
 	 * @throws RuntimeException if the game is already over.
 	 */
 	public boolean play(int column) {
-		//column is one index bigger than the limit since it starts at 1
-		
-		//throw new RuntimeException("Not implemented");
 		
 		//lets current player play until move is valid so make
 		//so don't update turnCount if it is false
@@ -69,8 +60,6 @@ public class Board {
 		}else { //is valid column
 			//check if full
 			for(int i = theBoard.length-1; i >= 0; i--) { 
-				//if find empty slot in column drop it in, might have to make for loop go backwards
-				//out of bounds error bc column is > index - fixed
 				if(theBoard[i][column-1] == 'e') {
 					theBoard[i][column-1] = currentPlayer();
 					turnCount++;
@@ -136,18 +125,16 @@ public class Board {
 				}
 			}
 		}
-		//maybe this is already implied? VERY WRONG FIX IT 
+    
 		//the whole board is filled and is a draw 
 		for(int i = 0; i< theBoard.length; i++) {
 			for(int j = 0; j < theBoard[i].length; j++) {
-				if(theBoard[i][j] == 'e') { //wrong, doesn't cover all spots correctly 
+				if(theBoard[i][j] == 'e') {  
 					return false;
 				}
 			}
 		}
 		return true;
-		
-		return false;
 		
 	}
 
@@ -164,7 +151,6 @@ public class Board {
 		}else {
 			return ' ';
 		}
-		//throw new RuntimeException("Not implemented");
 	}
 
 	/**
@@ -175,7 +161,6 @@ public class Board {
 	 * @return a string representation of the game
 	 */
 	public String toString() {
-		//return "toString() method not implemented.";
 		
 		String s = "";
 		
@@ -198,27 +183,29 @@ public class Board {
 	 * you must have defined the toString method.
 	 */
 	public static void main(String[] args) {
-		
-		
+    Scanner in = new Scanner(System.in);  // Create a Scanner object
+   
 		Board b = new Board();
 		while (!b.gameOver()) {
 			boolean legalMove = false;
 			while (!legalMove) {
-				StdOut.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
-				StdOut.println(b);
-				StdOut.println("Current player: " + b.currentPlayer());
-				StdOut.println("Enter column number for next move: ");
-				int col = StdIn.readInt();
+				System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
+				System.out.println(b);
+				System.out.println("Current player: " + b.currentPlayer());
+				System.out.println("Enter column number for next move: ");
+				int col = Integer.parseInt(in.nextLine());
 				legalMove = b.play(col);
 			}
 		}
-		StdOut.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
-		StdOut.println(b);
-		StdOut.println("GAME OVER");
+		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
+		System.out.println(b);
+		System.out.println("GAME OVER");
 		if (b.winner() == ' ')
-			StdOut.println("It's a draw");
+			System.out.println("It's a draw");
 		else
-			StdOut.println(b.winner() + " WINS!!!");
+			System.out.println(b.winner() + " WINS!!!");
+
+    in.close();
 	}
 	
 }
