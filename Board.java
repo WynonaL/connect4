@@ -51,7 +51,7 @@ public class Board {
 		//lets current player play until move is valid so make
 		//so don't update turnCount if it is false
 
-		if(this.gameOver()) { //wrong?
+		if(this.gameOver()) { 
 			throw new RuntimeException("Game is already over.");
 		}
 		
@@ -80,10 +80,6 @@ public class Board {
 	 * @return {@code true} if the game is over and {@code false} if it is not over.
 	 */
 	public boolean gameOver() {
-		//throw new RuntimeException("Not implemented");
-		
-		//runs wrong. says win when board is empty because they are all e's -corrected?
-		//still runs wrong
 		
 		//horizontal 4 in a row
 		for(int i = 0; i<theBoard.length; i++){
@@ -183,7 +179,7 @@ public class Board {
 	 * you must have defined the toString method.
 	 */
 	public static void main(String[] args) {
-    Scanner in = new Scanner(System.in);  // Create a Scanner object
+    Scanner in = new Scanner(System.in);  
    
 		Board b = new Board();
 		while (!b.gameOver()) {
